@@ -522,6 +522,7 @@ function VirtualRepeatController($scope, $element, $attrs, $browser, $document, 
   this.$attrs = $attrs;
   this.$browser = $browser;
   this.$document = $document;
+  this.$mdUtil = $mdUtil;
   this.$rootScope = $rootScope;
   this.$$rAF = $$rAF;
 
@@ -823,7 +824,7 @@ VirtualRepeatController.prototype.virtualRepeatUpdate_ = function(items, oldItem
     var firstRenderStartIndex = this.$attrs.mdStartIndex ?
       this.$scope.$eval(this.$attrs.mdStartIndex) :
       this.container.topIndex;
-    this.container.scrollToIndex(firstRenderStartIndex);
+    this.$mdUtil.nextTick(this.container.scrollToIndex.bind(this.container, firstRenderStartIndex));
   }
 
   this.isVirtualRepeatUpdating_ = false;
